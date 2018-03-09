@@ -48,8 +48,23 @@
 
 ; -----
 ; Ways of defining variables
-
 (let ((x 10))) 
+; global variables:
+(defvar *count* 0
+  "Count of widgets made so far.") ; defvar assigns the value to the variable only if the variable is undefined
+
+(setf *count* (+ 1 *count*)) ; setf changes the value of a global variable
+
+(defparameter *gap-tolerance* 0.001
+  "Tolerance to be allowed in widget gaps.")
+;; defining a constant   
+(defconstant name initial-value-form [ documentation-string ])
+
+; asignment:
+(setf x 10) ;  Simple variable:    
+(setf (aref a 0) 10);  Array:              
+(setf (gethash 'key hash) 10);  Hash table:         
+(setf (field o) 10);  Slot named 'field': 
 
 ; ---- variable scope when using let
 (defun foo (x)
@@ -63,5 +78,11 @@
 
 
 ; --- with let* you can use variables declare earlier
- 
  (let* ((x 10) (y (+ x 10))) (list x y))
+
+
+ ; -- closure example:
+(defparameter *fn* (let ((count 0)) #'(lambda () (setf count (1+ count)))))
+(funcall *fn*) ; => 1
+(funcall *fn*) ; => 2
+(funcall *fn*) ; => 3
