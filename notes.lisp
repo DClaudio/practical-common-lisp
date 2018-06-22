@@ -26,7 +26,7 @@
  (foo)                 ; ==> (NIL NIL NIL)
 
 ; -----
-; &rest - arbitrary number of arguments that get collected into a list
+; &rest/&body - arbitrary number of arguments that get collected into a list
 
 ; -----
 ; &optional - optional parameters to a function
